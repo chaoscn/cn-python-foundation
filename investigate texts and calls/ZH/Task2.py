@@ -3,6 +3,7 @@
 你将在以后的课程中了解更多有关读取文件的知识。
 """
 import csv
+from collections import defaultdict
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
     texts = list(reader)
@@ -22,4 +23,12 @@ September 2016.".
 如果键已经存在于字典内，为键所对应的值加上对应数值；
 如果键不存在于字典内，将此键加入字典，并将它的值设为给定值。
 """
+telephoneDic = defaultdict(int)
+for c in calls:
+    print(type(c[3]))
+    telephoneDic[c[0]] = int(c[3]) if int(c[3]) > int(telephoneDic[c[0]]) else int(telephoneDic[c[0]])
+    telephoneDic[c[1]] = int(c[3]) if int(c[3]) > int(telephoneDic[c[1]]) else int(telephoneDic[c[1]])
 
+result = max(telephoneDic.items(), key= lambda x: x[1])
+
+print ("%s spent the longest time, %s  seconds, on the phone during September 2016."% (result[0],result[1] ))

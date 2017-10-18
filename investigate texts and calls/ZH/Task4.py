@@ -25,4 +25,29 @@ with open('calls.csv', 'r') as f:
 <list of numbers>
 电话号码不能重复，每行打印一条，按字母顺序输出。
 """
+suspiciousList = []
+inCallList= []
 
+for c in calls:
+    if c[0] not in suspiciousList:
+        suspiciousList.append(c[0])
+    if c[1] not in inCallList:
+        inCallList.append(c[1])
+
+textList= []
+for t in texts:
+    if t[0] not in textList:
+        textList.append(t[0])
+    if t[1] not in textList:
+        textList.append(t[1])
+
+for s in suspiciousList[:]:
+    if s in inCallList:
+        suspiciousList.remove(s)
+        continue
+    if s in textList:
+        suspiciousList.remove(s)
+
+print('These numbers could be telemarketers: ')
+for s in sorted(suspiciousList):
+    print(s)

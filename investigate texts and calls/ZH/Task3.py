@@ -3,6 +3,7 @@
 你将在以后的课程中了解更多有关读取文件的知识。
 """
 import csv
+from collections import defaultdict
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -39,3 +40,23 @@ with open('calls.csv', 'r') as f:
 to other fixed lines in Bangalore."
 注意：百分比应包含2位小数。
 """
+telephoneDic = defaultdict(int)
+for c in calls:
+    if c[0].startswith('(080)'):
+        if '(' in c[1] and ')' in c[1]:  # local phone
+            telephoneDic[c[1][c[1].index('(')+1:c[1].index(')')]] += 1
+        if ' ' in c[1] :  # local mobile
+            telephoneDic[c[1][0:4]] += 1
+
+print('The numbers called by people in Bangalore have codes:\n')
+for k in sorted(telephoneDic.keys()):
+    print(k)
+
+totalOutCalls = sum(telephoneDic.values())
+localOutCall = 0
+for k,v in telephoneDic.items():
+    if k.startswith('080'):
+        localOutCall += int(v)
+
+percent = format(float(localOutCall)/float(totalOutCalls),'.2f')
+print('%s percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore'% percent)
