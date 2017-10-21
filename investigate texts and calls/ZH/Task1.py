@@ -22,16 +22,22 @@ with open('calls.csv', 'r') as f:
 """
 
 telephoneList= []
+telephonesSet = set()
 for t in texts:
     if t[0] not in telephoneList:
         telephoneList.append(t[0])
     if t[1] not in telephoneList:
         telephoneList.append(t[1])
+    telephonesSet.add(t[0])
+    telephonesSet.add(t[1])
 
 for c in calls:
     if c[0] not in telephoneList:
         telephoneList.append(c[0])
     if c[1] not in telephoneList:
         telephoneList.append(c[1])
+    telephonesSet.add(c[0])
+    telephonesSet.add(c[1])
 
-print ('There are %s different telephone numbers in the records.'% (telephoneList.__len__()))  # len(telephoneList)
+print ('There are %s different telephone numbers in the records.'% (len(telephonesSet)))  # len(telephoneList)
+

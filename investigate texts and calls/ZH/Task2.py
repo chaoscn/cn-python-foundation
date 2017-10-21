@@ -25,9 +25,8 @@ September 2016.".
 """
 telephoneDic = defaultdict(int)
 for c in calls:
-    print(type(c[3]))
-    telephoneDic[c[0]] = int(c[3]) if int(c[3]) > int(telephoneDic[c[0]]) else int(telephoneDic[c[0]])
-    telephoneDic[c[1]] = int(c[3]) if int(c[3]) > int(telephoneDic[c[1]]) else int(telephoneDic[c[1]])
+    telephoneDic[c[0]] += int(c[3]) #if int(c[3]) > int(telephoneDic[c[0]]) else int(telephoneDic[c[0]])
+    telephoneDic[c[1]] += int(c[3]) # if int(c[3]) > int(telephoneDic[c[1]]) else int(telephoneDic[c[1]])
 
 result = max(telephoneDic.items(), key= lambda x: x[1])
 
